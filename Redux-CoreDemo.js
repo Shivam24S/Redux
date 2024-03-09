@@ -5,9 +5,18 @@ const redux = require("redux");
 // we have to pass our  reducer function to store as parameter
 
 const counterReducer = (state = { counter: 0 }, action) => {
-  return {
-    counter: state.counter + 1,
-  };
+  // based on action increment decrement
+  if (action.type === "increment") {
+    return {
+      counter: state.counter + 1,
+    };
+  } else if (action.type === "decrement") {
+    return {
+      counter: state.counter - 1,
+    };
+  }
+  //   otherwise return state
+  return state;
 };
 
 // creating store for central state management
@@ -25,3 +34,4 @@ store.subscribe(counterSubscriber);
 
 // now dispatch action
 store.dispatch({ type: "increment" });
+store.dispatch({ type: "decrement" });
